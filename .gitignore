@@ -253,3 +253,45 @@ $RECYCLE.BIN/
 # Logs
 *.log
 logs/
+
+# ============================================================================
+# AMD VIVADO / VITIS (PYNQ-Z2 project: snake_UDP_FREErtos)
+# ============================================================================
+# Wel in git: *.xpr, *.srcs/ (block design .bd + .xci), constraints/*.xdc,
+#             *.xsa (hardware-export voor Vitis), Vitis app-broncode (src/)
+# Niet in git: alles wat Vivado/Vitis opnieuw genereert.
+
+# Vivado logs & tijdelijke bestanden
+*.jou
+*.log
+*.str
+.Xil/
+vivado_pid*.zip
+vivado_pid*.str
+
+# Vivado gegenereerde projectmappen
+**/*.cache/
+**/*.gen/
+**/*.runs/
+**/*.hw/
+**/*.ip_user_files/
+**/*.sim/
+
+# Digilent vivado-library (106 MB) -> zelf downloaden, zie README
+**/vivado-library-master/
+**/vivado-library/
+
+# Vitis workspace: IDE-metadata en build-output
+**/vitis_workspace/_ide/
+**/vitis_workspace/.vitis/
+**/vitis_workspace/**/compile_commands.json
+**/vitis_workspace/**/logs/
+
+# Vitis app: build-output en gekopieerde bitstream (launch.json blijft)
+**/vitis_workspace/*/_ide/bitstream/
+**/vitis_workspace/*/_ide/psinit/
+**/vitis_workspace/*/_ide/hwspec.checksum
+
+# Vitis platform: alles behalve vitis-comp.json wordt uit de .xsa gegenereerd
+**/vitis_workspace/*_plat/*
+!**/vitis_workspace/*_plat/vitis-comp.json
