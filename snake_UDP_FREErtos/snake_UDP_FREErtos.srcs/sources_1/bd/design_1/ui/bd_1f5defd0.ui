@@ -1,42 +1,42 @@
 {
    "ActiveEmotionalView":"Default View",
    "Default View_ScaleFactor":"0.717936",
-   "Default View_TopLeft":"-24,-488",
+   "Default View_TopLeft":"-25,-350",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:24.0
 #  -string -flagsOSRD
-preplace port DDR -pg 1 -lvl 5 -x 1620 -y -90 -defaultsOSRD
-preplace port FIXED_IO -pg 1 -lvl 5 -x 1620 -y -60 -defaultsOSRD
-preplace port hdmi_tx -pg 1 -lvl 5 -x 1620 -y -320 -defaultsOSRD
-preplace inst processing_system7_0 -pg 1 -lvl 2 -x 700 -y -50 -defaultsOSRD
-preplace inst clk_wiz_0 -pg 1 -lvl 2 -x 700 -y 110 -defaultsOSRD
+preplace port DDR -pg 1 -lvl 5 -x 1630 -y -90 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -lvl 5 -x 1630 -y -60 -defaultsOSRD
+preplace port hdmi_tx -pg 1 -lvl 5 -x 1630 -y -320 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 2 -x 710 -y -20 -defaultsOSRD
+preplace inst clk_wiz_0 -pg 1 -lvl 2 -x 710 -y 170 -defaultsOSRD
 preplace inst v_tc_0 -pg 1 -lvl 1 -x 240 -y -140 -defaultsOSRD
 preplace inst v_axi4s_vid_out_0 -pg 1 -lvl 1 -x 240 -y -370 -defaultsOSRD
-preplace inst rgb2dvi_0 -pg 1 -lvl 2 -x 700 -y -320 -defaultsOSRD
-preplace inst axi_smc -pg 1 -lvl 3 -x 1120 -y -260 -defaultsOSRD
-preplace inst rst_clk_wiz_0_74M -pg 1 -lvl 3 -x 1120 -y 80 -defaultsOSRD
-preplace inst xlconstant_0 -pg 1 -lvl 2 -x 700 -y -200 -defaultsOSRD
+preplace inst rgb2dvi_0 -pg 1 -lvl 2 -x 710 -y -320 -defaultsOSRD
+preplace inst axi_smc -pg 1 -lvl 3 -x 1130 -y -260 -defaultsOSRD
+preplace inst rst_clk_wiz_0_74M -pg 1 -lvl 3 -x 1130 -y 80 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 2 -x 710 -y -200 -defaultsOSRD
 preplace inst axi_vdma_0 -pg 1 -lvl 1 -x 240 -y 70 -defaultsOSRD
-preplace inst axi_mem_intercon -pg 1 -lvl 4 -x 1460 -y -480 -defaultsOSRD
-preplace netloc clk_wiz_0_clk_out1 1 0 4 40 -520 460 -410 930 -410 1310
-preplace netloc clk_wiz_0_locked 1 1 2 490 180 950
-preplace netloc processing_system7_0_FCLK_CLK0 1 1 2 460 190 910
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 2 430 200 920
-preplace netloc rst_clk_wiz_0_74M_peripheral_aresetn 1 0 4 30 -530 480J -420 950J -420 1320
+preplace inst axi_mem_intercon -pg 1 -lvl 4 -x 1470 -y -480 -defaultsOSRD
+preplace netloc clk_wiz_0_clk_out1 1 0 4 40 -520 460 -410 940 -410 1320
+preplace netloc clk_wiz_0_locked 1 1 2 490 240 960
+preplace netloc processing_system7_0_FCLK_CLK0 1 1 2 460 250 930
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 2 430 260 950
+preplace netloc rst_clk_wiz_0_74M_peripheral_aresetn 1 0 4 30 -530 480J -420 960J -420 1330
 preplace netloc v_axi4s_vid_out_0_vtg_ce 1 0 2 50 -510 440
-preplace netloc xlconstant_0_dout 1 0 3 20 -540 NJ -540 910
-preplace netloc processing_system7_0_DDR 1 2 3 NJ -100 N -100 1600
-preplace netloc processing_system7_0_FIXED_IO 1 2 3 NJ -80 N -80 1600
-preplace netloc processing_system7_0_M_AXI_GP0 1 2 1 940J -280n
-preplace netloc rgb2dvi_0_TMDS 1 2 3 940J -340 NJ -340 1600
+preplace netloc xlconstant_0_dout 1 0 3 20 -540 NJ -540 930
+preplace netloc axi_mem_intercon_M00_AXI 1 1 4 480 -400 NJ -400 1310J -360 1610
+preplace netloc axi_smc_M00_AXI 1 0 4 10 -550 NJ -550 NJ -550 1300
+preplace netloc axi_vdma_0_M_AXIS_MM2S 1 0 2 60 -500 430
+preplace netloc axi_vdma_0_M_AXI_MM2S 1 1 3 470J -430 NJ -430 1310
+preplace netloc processing_system7_0_DDR 1 2 3 NJ -100 N -100 1610
+preplace netloc processing_system7_0_FIXED_IO 1 2 3 NJ -80 N -80 1610
+preplace netloc processing_system7_0_M_AXI_GP0 1 2 1 950J -280n
+preplace netloc rgb2dvi_0_TMDS 1 2 3 950J -340 NJ -340 1610
 preplace netloc v_axi4s_vid_out_0_vid_io_out 1 1 1 450 -440n
 preplace netloc v_tc_0_vtiming_out 1 0 2 60 -240 420
-preplace netloc axi_smc_M00_AXI 1 0 4 10 -550 NJ -550 NJ -550 1290
-preplace netloc axi_vdma_0_M_AXI_MM2S 1 1 3 470J -430 NJ -430 1300
-preplace netloc axi_mem_intercon_M00_AXI 1 1 4 480 -400 NJ -400 1300J -360 1600
-preplace netloc axi_vdma_0_M_AXIS_MM2S 1 0 2 60 -500 430
-levelinfo -pg 1 -10 240 700 1120 1460 1620
-pagesize -pg 1 -db -bbox -sgen -10 -600 2010 370
+levelinfo -pg 1 -20 240 710 1130 1470 1630
+pagesize -pg 1 -db -bbox -sgen -20 -600 2010 370
 "
 }
 0

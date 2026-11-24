@@ -1,0 +1,4 @@
+domain_path: W:/Digitale_communicatie/pynq2-snake/ws/pynq_rtos_plat/export/pynq_rtos_plat/sw/pynq_rtos_plat
+app_src_dir: C:\AMDDesignTools\2026.1\Vitis\data\embeddedsw\lib\sw_apps\freertos_lwip_udp_perf_server
+template: freertos_lwip_udp_perf_server
+lang: c

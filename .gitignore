@@ -295,3 +295,19 @@ vivado_pid*.str
 # Vitis platform: alles behalve vitis-comp.json wordt uit de .xsa gegenereerd
 **/vitis_workspace/*_plat/*
 !**/vitis_workspace/*_plat/vitis-comp.json
+
+# Korte Vitis-workspace voor fase 3+ (Windows 260-tekens padlimiet), zelfde regels
+ws/_ide/
+ws/.vitis/
+ws/**/compile_commands.json
+ws/**/logs/
+ws/*/build/
+ws/*/_ide/bitstream/
+ws/*/_ide/psinit/
+ws/*/_ide/hwspec.checksum
+ws/*_plat/*
+!ws/*_plat/vitis-comp.json
+
+# Mislukte fase-3-poging in de oude (te diepe) workspace; de werkende versie staat in ws/
+snake_UDP_FREErtos/vitis_workspace/snake_app/
+snake_UDP_FREErtos/vitis_workspace/pynq_rtos_plat/
