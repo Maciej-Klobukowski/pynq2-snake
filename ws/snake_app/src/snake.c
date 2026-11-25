@@ -59,6 +59,8 @@
 #define RESPAWN_TICKS 6             /* ticks voor je terugkomt na een botsing */
 #define MAXLEN        (COLS * ROWS)
 #define TIMEOUT_MS    3000          /* speler "weg" na 3 s zonder pakket */
+#define DISCOVERY_PORT 5050         /* hier roept het board "PYNQSNAKE" (broadcast) */
+#define DISCOVERY_MSG  "PYNQSNAKE"
 
 enum { EMPTY = 0, WALL, FOOD, SNAKE1, SNAKE2 };
 enum { DIR_UP = 0, DIR_DOWN, DIR_LEFT, DIR_RIGHT };
@@ -776,6 +778,36 @@ static void game_task(void *arg)
     }
 }
 
+/* Discovery: elke seconde een broadcast "PYNQSNAKE" op poort 5050.
+ * Controllers (andere PYNQ's of de pc) luisteren hierop en halen het IP van
+ * dit board uit het afzenderadres. Zo hoeft niemand een IP in te typen en
+ * werkt het op elk netwerk. */
+static void beacon_task(void *arg)
+{
+    (void)arg;
+    struct sockaddr_in to;
+    int on = 1;
+
+    int sock = lwip_socket(AF_INET, SOCK_DGRAM, 0);
+    if (sock < 0) {
+        xil_printf("Beacon: socket mislukt\r\n");
+        vTaskDelete(NULL);
+    }
+    lwip_setsockopt(sock, SOL_SOCKET, SO_BROADCAST, &on, sizeof(on));
+
+    memset(&to, 0, sizeof(to));
+    to.sin_family      = AF_INET;
+    to.sin_port        = htons(DISCOVERY_PORT);
+    to.sin_addr.s_addr = htonl(INADDR_BROADCAST);     /* 255.255.255.255 */
+
+    xil_printf("Beacon: broadcast \"%s\" op poort %d\r\n", DISCOVERY_MSG, DISCOVERY_PORT);
+    for (;;) {
+        lwip_sendto(sock, DISCOVERY_MSG, strlen(DISCOVERY_MSG), 0,
+                    (struct sockaddr *)&to, sizeof(to));
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+}
+
 static void udp_task(void *arg)
 {
     int player = (int)(intptr_t)arg;
@@ -849,6 +881,8 @@ void print_app_header(void)
                UDP_PORT_P1, UDP_PORT_P2);
     xil_printf("Commando's: U D L R (richting), N (menu), 1/2 (aantal spelers)\r\n");
     xil_printf("J = heartbeat, X = afmelden. 2 spelers start pas als beide verbonden zijn\r\n");
+    xil_printf("Discovery: broadcast \"%s\" op UDP poort %d (controllers vinden dit board zelf)\r\n",
+               DISCOVERY_MSG, DISCOVERY_PORT);
     xil_printf("Appel = +1 en omdraaien. 2 spelers: eerste tot %d wint\r\n", WIN_SCORE);
 }
 
@@ -878,4 +912,5 @@ void start_application(void)
     sys_thread_new("udp_p1", udp_task, (void *)0, 1024, DEFAULT_THREAD_PRIO);
     sys_thread_new("udp_p2", udp_task, (void *)1, 1024, DEFAULT_THREAD_PRIO);
     sys_thread_new("game",   game_task, NULL,     1024, DEFAULT_THREAD_PRIO);
+    sys_thread_new("beacon", beacon_task, NULL,   1024, DEFAULT_THREAD_PRIO);
 }

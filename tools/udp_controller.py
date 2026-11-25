@@ -1,9 +1,11 @@
 """
 UDP-controller voor PYNQ2-Snake (Windows).
 
-Gebruik:
-    python tools/udp_controller.py 192.168.0.196 5000   # speler 1
-    python tools/udp_controller.py 192.168.0.196 5001   # speler 2
+Gebruik (board automatisch zoeken, werkt op elk netwerk):
+    python tools/udp_controller.py 5000                 # speler 1
+    python tools/udp_controller.py 5001                 # speler 2
+Of met een vast IP:
+    python tools/udp_controller.py 192.168.0.196 5000
 
 Toetsen (AZERTY):
     pijltjes of Z/Q/S/D  -> richting (Z=omhoog, Q=links, S=omlaag, D=rechts)
@@ -31,6 +33,28 @@ LETTERS = {"z": "U", "q": "L", "s": "D", "d": "R", "n": "N",
            "1": "1", "2": "2", "&": "1", "é": "2"}
 
 HEARTBEAT_S = 1.0
+DISCOVERY_PORT = 5050          # het board broadcast hier elke seconde "PYNQSNAKE"
+DISCOVERY_MSG = b"PYNQSNAKE"
+
+
+def discover_board(timeout_s: float = 10.0) -> str:
+    """Wacht op de broadcast van het board en geef zijn IP-adres terug."""
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    s.bind(("", DISCOVERY_PORT))
+    s.settimeout(timeout_s)
+    print(f"Board zoeken op het netwerk (UDP {DISCOVERY_PORT})...")
+    try:
+        while True:
+            data, (ip, _) = s.recvfrom(64)
+            if data.startswith(DISCOVERY_MSG):
+                print(f"Board gevonden op {ip}")
+                return ip
+    except socket.timeout:
+        sys.exit("Geen board gevonden. Staat het board aan en zit je op hetzelfde netwerk?\n"
+                 "Laat eventueel Python toe in de Windows Firewall, of geef het IP zelf op.")
+    finally:
+        s.close()
 
 
 def heartbeat(sock: socket.socket, target: tuple, stop: threading.Event) -> None:
@@ -44,8 +68,12 @@ def heartbeat(sock: socket.socket, target: tuple, stop: threading.Event) -> None
 
 
 def main() -> None:
-    ip = sys.argv[1] if len(sys.argv) > 1 else "192.168.0.196"
-    port = int(sys.argv[2]) if len(sys.argv) > 2 else 5000
+    args = sys.argv[1:]
+    if len(args) >= 2:                      # IP + poort opgegeven
+        ip, port = args[0], int(args[1])
+    else:                                   # alleen poort (of niets): zelf zoeken
+        port = int(args[0]) if args else 5000
+        ip = discover_board()
     player = 1 if port == 5000 else 2
     target = (ip, port)
 
