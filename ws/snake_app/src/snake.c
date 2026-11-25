@@ -59,7 +59,8 @@
 #define RESPAWN_TICKS 6             /* ticks voor je terugkomt na een botsing */
 #define MAXLEN        (COLS * ROWS)
 #define TIMEOUT_MS    3000          /* speler "weg" na 3 s zonder pakket */
-#define DISCOVERY_PORT 5050         /* hier roept het board "PYNQSNAKE" (broadcast) */
+#define DISCOVERY_PORT 50505        /* hier roept het board "PYNQSNAKE" (broadcast);
+                                       niet 5050: die poort gebruikt Windows (CDPSvc) */
 #define DISCOVERY_MSG  "PYNQSNAKE"
 
 enum { EMPTY = 0, WALL, FOOD, SNAKE1, SNAKE2 };
@@ -778,7 +779,7 @@ static void game_task(void *arg)
     }
 }
 
-/* Discovery: elke seconde een broadcast "PYNQSNAKE" op poort 5050.
+/* Discovery: elke seconde een broadcast "PYNQSNAKE" op poort 50505.
  * Controllers (andere PYNQ's of de pc) luisteren hierop en halen het IP van
  * dit board uit het afzenderadres. Zo hoeft niemand een IP in te typen en
  * werkt het op elk netwerk. */

@@ -55,11 +55,12 @@ u8 board_mac_last_byte(void);       /* in client.c: 0x11 = speler 1, 0x12 = spel
 
 #define THREAD_STACKSIZE 1024
 
-/* Fallback als DHCP faalt. Het laatste getal wordt .201 (speler 1) of .202
- * (speler 2), zodat twee controllers nooit hetzelfde adres krijgen. */
-#define DEFAULT_IP_ADDRESS "192.168.0.201"
-#define DEFAULT_IP_MASK "255.255.255.0"
-#define DEFAULT_GW_ADDRESS "192.168.0.1"
+/* Geen DHCP: link-local adres 169.254.10.201 (speler 1) of .202 (speler 2).
+ * Werkt op elk netwerk zonder iets aan te passen (Windows gebruikt dan
+ * zelf ook 169.254.x.x). */
+#define DEFAULT_IP_ADDRESS "169.254.10.201"
+#define DEFAULT_IP_MASK "255.255.0.0"
+#define DEFAULT_GW_ADDRESS "0.0.0.0"
 
 struct netif server_netif;
 

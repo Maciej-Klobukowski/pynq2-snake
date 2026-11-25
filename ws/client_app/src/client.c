@@ -8,7 +8,7 @@
  *
  *  Automatisch op elk netwerk:
  *    - IP via DHCP (main.c van het template)
- *    - het hoofdboard broadcast elke seconde "PYNQSNAKE" op UDP 5050;
+ *    - het hoofdboard broadcast elke seconde "PYNQSNAKE" op UDP 50505;
  *      wij halen zijn IP uit het afzenderadres (discovery_task)
  *    - elke seconde een heartbeat 'J' zodat het hoofdboard weet dat we er zijn
  *
@@ -35,7 +35,7 @@
 #include "xil_printf.h"
 
 /* ================= instellingen ================= */
-#define DISCOVERY_PORT     5050
+#define DISCOVERY_PORT     50505   /* niet 5050: bezet door Windows (CDPSvc) */
 #define DISCOVERY_MSG      "PYNQSNAKE"
 #define PORT_P1            5000
 #define PORT_P2            5001

@@ -33,7 +33,8 @@ LETTERS = {"z": "U", "q": "L", "s": "D", "d": "R", "n": "N",
            "1": "1", "2": "2", "&": "1", "é": "2"}
 
 HEARTBEAT_S = 1.0
-DISCOVERY_PORT = 5050          # het board broadcast hier elke seconde "PYNQSNAKE"
+DISCOVERY_PORT = 50505         # het board broadcast hier elke seconde "PYNQSNAKE"
+                               # (niet 5050: die poort houdt Windows bezet, dienst CDPSvc)
 DISCOVERY_MSG = b"PYNQSNAKE"
 
 

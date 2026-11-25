@@ -54,10 +54,12 @@ void start_application();
 
 #define THREAD_STACKSIZE 1024
 
-/* Vast IP in het thuisnetwerk (router 192.168.0.1), gebruikt als DHCP faalt */
-#define DEFAULT_IP_ADDRESS "192.168.0.200"
-#define DEFAULT_IP_MASK "255.255.255.0"
-#define DEFAULT_GW_ADDRESS "192.168.0.1"
+/* Geen DHCP (bv. kabel rechtstreeks naar een pc): link-local adres 169.254.x.x.
+ * Werkt op elk netwerk zonder iets aan te passen; Windows kiest in dat geval
+ * zelf ook een 169.254-adres, dus pc en board zitten dan in hetzelfde netwerk. */
+#define DEFAULT_IP_ADDRESS "169.254.10.200"
+#define DEFAULT_IP_MASK "255.255.0.0"
+#define DEFAULT_GW_ADDRESS "0.0.0.0"
 
 struct netif server_netif;
 
